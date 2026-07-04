@@ -6,9 +6,25 @@
 <title>Kvick ID — Verify once. Reuse with consent.</title>
 <meta name="description" content="Kvick ID is a European identity layer for regulated platforms. A person completes KYC once; participating platforms confirm the status — never the documents — with the person's consent each time.">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232B3BBB'/%3E%3Cpath d='M20 16v32M20 34l16-18M22 32l16 16' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Spline+Sans+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  /* Self-hosted fonts — no external host is contacted (privacy: no visitor
+     IP is disclosed to a third party; integrity: no CDN dependency). Both
+     are variable fonts, so one file covers the weight range each uses. */
+  @font-face {
+    font-family: "Schibsted Grotesk";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("/fonts/schibsted-grotesk.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Spline Sans Mono";
+    font-style: normal;
+    font-weight: 400 500;
+    font-display: swap;
+    src: url("/fonts/spline-sans-mono.woff2") format("woff2");
+  }
+</style>
 <style>
   :root {
     /* Fallbacks for engines without OKLCH */
