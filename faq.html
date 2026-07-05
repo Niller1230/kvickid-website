@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Kvick ID FAQ</title>
+<meta name="description" content="Questions and answers about Kvick ID: what it is, what happens to your documents, what platforms see, consent, expiry, and account safety.">
+<meta name="theme-color" content="#0d1013">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='10' fill='%231c2126' stroke='%2335e0a0' stroke-width='3'/%3E%3Cpath d='M20 16v32M20 34l16-18M22 32l16 16' stroke='%2335e0a0' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<style>
+  @font-face {
+    font-family: "Schibsted Grotesk";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("/fonts/schibsted-grotesk.woff2") format("woff2");
+  }
+  @font-face {
+    font-family: "Spline Sans Mono";
+    font-style: normal;
+    font-weight: 400 500;
+    font-display: swap;
+    src: url("/fonts/spline-sans-mono.woff2") format("woff2");
+  }
+</style>
+<style>
+  :root {
+    --bg: #0d1013;
+    --bg-deep: #08090b;
+    --surface: #14181c;
+    --surface-2: #1c2126;
+    --line: #2a3138;
+    --ink: #edf1f3;
+    --ink-soft: #93a0aa;
+    --accent: #35e0a0;
+    --accent-ink: #08150f;
+  }
+  @supports (color: oklch(50% 0 0)) {
+    :root {
+      --bg: oklch(0.14 0.010 250);
+      --bg-deep: oklch(0.09 0.008 250);
+      --surface: oklch(0.185 0.010 250);
+      --surface-2: oklch(0.235 0.012 250);
+      --line: oklch(0.32 0.015 250);
+      --ink: oklch(0.95 0.005 250);
+      --ink-soft: oklch(0.68 0.02 250);
+      --accent: oklch(0.78 0.17 152);
+      --accent-ink: oklch(0.14 0.03 152);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+
+  body {
+    font-family: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--bg);
+    text-rendering: optimizeLegibility;
+  }
+  h1, h2, h3 { line-height: 1.14; text-wrap: balance; font-weight: 700; }
+  p { text-wrap: pretty; }
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+
+  .wrap { max-width: 1060px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); }
+
+  /* ---------- header ---------- */
+  header {
+    position: sticky; top: 0; z-index: 40;
+    background: color-mix(in oklab, var(--bg) 86%, transparent);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid transparent;
+    transition: border-color .3s ease;
+  }
+  header.scrolled { border-bottom-color: var(--line); }
+  .header-in { display: flex; align-items: center; justify-content: space-between; padding-block: 0.9rem; gap: 1rem; }
+  .mark { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; color: var(--ink); }
+  .mark svg { display: block; }
+  .nav-side { display: flex; align-items: center; gap: 1.4rem; }
+  nav.site { display: flex; gap: 1.4rem; font-size: 0.95rem; font-weight: 500; }
+  nav.site a { text-decoration: none; color: var(--ink-soft); transition: color .2s ease; }
+  nav.site a:hover, nav.site a[aria-current="page"] { color: var(--ink); }
+  .login-link {
+    text-decoration: none; font-weight: 700; font-size: 0.9rem; color: var(--ink);
+    border: 1.5px solid color-mix(in oklab, var(--accent) 55%, transparent);
+    padding: 0.42rem 0.95rem; border-radius: 8px;
+    transition: border-color .18s ease, background .18s ease;
+  }
+  .login-link:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 10%, transparent); }
+  nav.site a:focus-visible, a:focus-visible, summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  @media (max-width: 700px) { nav.site { display: none; } }
+
+  /* ---------- page head ---------- */
+  .faq-head { padding-block: clamp(3rem, 8vw, 5.5rem) clamp(1rem, 3vw, 2rem); }
+  .faq-head h1 { font-size: clamp(2.2rem, 5vw, 3.4rem); letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .faq-head .lede { color: var(--ink-soft); max-width: 44em; font-size: clamp(1.05rem, 1.5vw, 1.15rem); }
+  .faq-head .lede a { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); text-underline-offset: 3px; }
+
+  /* ---------- accordion ---------- */
+  .qa-group { padding-block: clamp(1.5rem, 4vw, 2.5rem) 0; }
+  .qa-group > h2 { font-size: clamp(1.25rem, 2.4vw, 1.55rem); letter-spacing: -0.01em; margin-bottom: 0.6rem; }
+  .qa-list { border-bottom: 1px solid var(--line); }
+  details { border-top: 1px solid var(--line); }
+  summary {
+    list-style: none;
+    display: flex; justify-content: space-between; align-items: baseline; gap: 1.2rem;
+    padding-block: 1.15rem;
+    font-weight: 700; font-size: 1.08rem; letter-spacing: -0.005em;
+    cursor: pointer;
+  }
+  summary::-webkit-details-marker { display: none; }
+  summary .ind {
+    flex: none;
+    font-family: "Spline Sans Mono", monospace; font-weight: 500; font-size: 1.15rem;
+    color: var(--accent); line-height: 1;
+    transition: rotate .25s cubic-bezier(.22,1,.36,1);
+  }
+  details[open] summary .ind { rotate: 45deg; }
+  @media (prefers-reduced-motion: reduce) { summary .ind { transition: none; } }
+  .answer { padding-block: 0 1.5rem; color: var(--ink-soft); max-width: 62ch; }
+  .answer p + p { margin-top: 0.7rem; }
+  .answer strong { color: var(--ink); font-weight: 500; }
+  .answer a { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); text-underline-offset: 3px; }
+  .answer a:hover { text-decoration-color: var(--accent); }
+
+  /* ---------- business panel ---------- */
+  .biz { padding-block: clamp(3rem, 7vw, 5rem); }
+  .biz-panel {
+    border: 1.5px solid var(--line);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: clamp(1.5rem, 4vw, 2.4rem);
+    display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem, 3vw, 2rem);
+    align-items: start;
+  }
+  .biz-panel .glyph { color: var(--accent); margin-top: .3rem; }
+  .biz-panel h2 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); margin-bottom: 0.7rem; letter-spacing: -0.01em; }
+  .biz-panel p { color: var(--ink-soft); max-width: 58ch; }
+  .biz-panel p strong { color: var(--ink); font-weight: 500; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 700; font-size: 1rem;
+    padding: 0.8rem 1.5rem; border-radius: 8px; margin-top: 1.3rem;
+    color: var(--ink); border: 1.5px solid color-mix(in oklab, var(--accent) 55%, transparent);
+    transition: transform .18s cubic-bezier(.22,1,.36,1), background .18s ease, border-color .18s ease;
+  }
+  .btn:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 10%, transparent); }
+  .btn:active { transform: translateY(1px); }
+  @media (max-width: 640px) { .biz-panel { grid-template-columns: 1fr; } .biz-panel .glyph { display: none; } }
+
+  /* ---------- footer ---------- */
+  footer { background: var(--bg-deep); color: var(--ink); padding-block: clamp(2.5rem, 6vw, 4rem) 2rem; border-top: 1px solid var(--line); margin-top: clamp(2rem, 5vw, 3.5rem); }
+  .foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; align-items: flex-start; }
+  .foot-contact { font-size: 1.05rem; color: var(--ink-soft); }
+  .foot-contact a { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); text-underline-offset: 4px; }
+  .foot-contact a:hover { text-decoration-color: var(--accent); }
+  .foot-line {
+    margin-top: 2.5rem; padding-top: 1.4rem;
+    border-top: 1px solid var(--line);
+    display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; justify-content: space-between;
+    font-size: 0.85rem; color: var(--ink-soft);
+  }
+
+  /* ---------- motion ---------- */
+  .rise { opacity: 0; translate: 0 18px; transition: opacity .7s cubic-bezier(.22,1,.36,1), translate .7s cubic-bezier(.22,1,.36,1); }
+  .rise.in { opacity: 1; translate: 0 0; }
+  @media (prefers-reduced-motion: reduce) {
+    .rise { transition: none; opacity: 1; translate: 0 0; }
+    header, .btn, .login-link { transition: none; }
+  }
+</style>
+</head>
+<body>
+
+<header id="hd">
+  <div class="wrap header-in">
+    <a class="mark" href="/" aria-label="Kvick ID home">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="10" fill="var(--surface-2)" stroke="var(--accent)" stroke-width="3"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      Kvick&nbsp;ID
+    </a>
+    <div class="nav-side">
+      <nav class="site" aria-label="Site">
+        <a href="/#how">How it works</a>
+        <a href="/#receive">Data handling</a>
+        <a href="/faq.html" aria-current="page">FAQ</a>
+        <a href="mailto:contact@kvickid.com">Contact</a>
+      </nav>
+      <a class="login-link" href="/login.html">Log in</a>
+    </div>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="faq-head">
+      <h1 class="rise" data-d="0">Questions, answered.</h1>
+      <p class="lede rise" data-d="1">Plain answers about your Kvick ID, your data, and who sees what. If something is missing, write to <a href="mailto:contact@kvickid.com">contact@kvickid.com</a> and we will answer directly.</p>
+    </div>
+
+    <section class="qa-group rise" aria-labelledby="g1">
+      <h2 id="g1">Using Kvick ID</h2>
+      <div class="qa-list">
+        <details open>
+          <summary>What is Kvick ID?<span class="ind" aria-hidden="true">+</span></summary>
+          <div class="answer">
+            <p>Kvick ID is a personal account that holds the result of your identity verification, so you do not have to start from zero at every new platform. You complete KYC once, with a specialist verification provider. After that, platforms that work with Kvick ID can ask about your status, and nothing is shared until you approve the request.</p>
+          </div>
+        </details>
+        <details>
+          <summary>What does it cost me?<span class="ind" aria-hidden="true">+</span></summary>
+          <div class="answer">
+            <p>Kvick ID is designed to be free for individuals. Participating platforms pay for the service.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Can I use Kvick ID today?<span class="ind" aria-hidden="true">+</span></summary>
+          <div class="answer">
+            <p>Not yet. The system works end to end, but it currently runs on synthetic test data while formal legal review is prepared and the first pilot partners are selected. We say this plainly because a product built on trust should be honest about where it stands.</p>
+          </div>
+        </details>
+        <details>
+          <summary>How long does a verification last?<span class="ind" aria-hidden="true">+</span></summary>
+          <div class="answer">
+            <p>Every verification carries an expiry date, set when the result is issued. When it expires, or if the provider withdraws it, platforms are notified to stop relying on it, and you would verify again to refresh your status.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Can I say no to a request, or change my mind later?<span class="ind" aria-hidden="true">+</span></summary>
+          <div class="answer">
+            <p>Yes. Every request requires your explicit approval, and declining is always an option. If you gave a platform standing access, you can withdraw it at any time, which stops all further sharing.</p>
+            <p>One honest detail: what a platform already received while your consent was active stays with that platform. It relied on that answer at the time, and regulated companies are required to keep records of the checks they perform.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="qa-group rise" aria-labelledby="g2">
+      <h2 id="g2">Your data and privacy</h2>
+      <div class="qa-list">
+        <details>
+          <summary>What happens to my identity documents?<span class="ind" aria-hidden="true">+</span></summary>
+          <div class="answer">
+            <p>The verification itself is performed by a specialist KYC provider, and your documents and selfie stay with that provider. Kvick ID stores the outcome only: verified or not, at what level, and until when. We cannot lose or leak documents we never hold.</p>
+          </div>
+        </details>
+        <details>
+          <summary>What exactly does a platform see when I approve?<span class="ind" aria-hidden="true">+</span></summary>
+          <div class="answer">
+            <p>A short, signed status message: verified, the level, the provider, the date, and the expiry. No documents, no personal details beyond the status itself, and no mention of where you verified first. The complete payload is shown on <a href="/#receive">the front page</a>, and it really is that short.</p>
+          </div>
+        </details>
+        <details>
+          <summary>What if Kvick ID is hacked?<span class="ind" aria-hidden="true">+</span></summary>
+          <div class="answer">
+            <p>We designed the system around that question. Identity documents cannot be exposed, because Kvick ID never stores them. Status signatures cannot be forged, because the signing keys are kept separate from the data. What an attacker could reach is limited to basic account details and verification status. That would still be a serious incident, and we would treat it as one, but the damage is bounded by design.</p>
+          </div>
+        </details>
+        <details>
+          <summary>Can I delete my Kvick ID?<span class="ind" aria-hidden="true">+</span></summary>
+          <div class="answer">
+            <p>Yes, you will be able to close your account. Some records of past sharing may need to be kept for legally required periods, because regulated platforms relied on them for their own decisions. Exactly what is kept, and for how long, is being settled as part of the legal review, and it will be spelled out in plain language before launch.</p>
+          </div>
+        </details>
+        <details>
+          <summary>I received an email claiming to be from Kvick ID. How do I check?<span class="ind" aria-hidden="true">+</span></summary>
+          <div class="answer">
+            <p>Real Kvick ID emails only link to kvickid.com addresses, and we never ask for identity documents, passwords, or payment by email. If you are unsure, forward the message to <a href="mailto:contact@kvickid.com">contact@kvickid.com</a> and we will confirm or deny that it came from us.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <section class="biz" aria-labelledby="biz-h">
+      <div class="biz-panel rise">
+        <div class="glyph" aria-hidden="true">
+          <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M8.5 7V5.6A1.6 1.6 0 0 1 10.1 4h3.8a1.6 1.6 0 0 1 1.6 1.6V7"/></svg>
+        </div>
+        <div>
+          <h2 id="biz-h">Here on behalf of a business or partner?</h2>
+          <p>This page is written for people using Kvick ID personally. If you are evaluating Kvick ID for a platform, or interested in a pilot partnership, we would rather talk directly. <strong>Reach us and we will respond ourselves, not through a form.</strong></p>
+          <a class="btn" href="mailto:contact@kvickid.com?subject=Platform%20inquiry">Contact us about a partnership</a>
+        </div>
+      </div>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="foot-top">
+      <a class="mark" href="/" aria-label="Kvick ID home">
+        <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="3" opacity=".8"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".9"/></svg>
+        Kvick&nbsp;ID
+      </a>
+      <p class="foot-contact">Questions, pilots, or verifying an email you received:<br><a href="mailto:contact@kvickid.com">contact@kvickid.com</a></p>
+    </div>
+    <div class="foot-line">
+      <span>Kvick ID · in development · all example data on this site is synthetic</span>
+      <span>© 2026</span>
+    </div>
+  </div>
+</footer>
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {"@type": "Question", "name": "What is Kvick ID?", "acceptedAnswer": {"@type": "Answer", "text": "Kvick ID is a personal account that holds the result of your identity verification, so you do not have to start from zero at every new platform. You complete KYC once, with a specialist verification provider. After that, platforms that work with Kvick ID can ask about your status, and nothing is shared until you approve the request."}},
+    {"@type": "Question", "name": "What does it cost me?", "acceptedAnswer": {"@type": "Answer", "text": "Kvick ID is designed to be free for individuals. Participating platforms pay for the service."}},
+    {"@type": "Question", "name": "Can I use Kvick ID today?", "acceptedAnswer": {"@type": "Answer", "text": "Not yet. The system works end to end, but it currently runs on synthetic test data while formal legal review is prepared and the first pilot partners are selected."}},
+    {"@type": "Question", "name": "How long does a verification last?", "acceptedAnswer": {"@type": "Answer", "text": "Every verification carries an expiry date, set when the result is issued. When it expires, or if the provider withdraws it, platforms are notified to stop relying on it, and you would verify again to refresh your status."}},
+    {"@type": "Question", "name": "Can I say no to a request, or change my mind later?", "acceptedAnswer": {"@type": "Answer", "text": "Yes. Every request requires your explicit approval, and declining is always an option. If you gave a platform standing access, you can withdraw it at any time, which stops all further sharing. What a platform already received while your consent was active stays with that platform."}},
+    {"@type": "Question", "name": "What happens to my identity documents?", "acceptedAnswer": {"@type": "Answer", "text": "The verification itself is performed by a specialist KYC provider, and your documents and selfie stay with that provider. Kvick ID stores the outcome only: verified or not, at what level, and until when."}},
+    {"@type": "Question", "name": "What exactly does a platform see when I approve?", "acceptedAnswer": {"@type": "Answer", "text": "A short, signed status message: verified, the level, the provider, the date, and the expiry. No documents, no personal details beyond the status itself, and no mention of where you verified first."}},
+    {"@type": "Question", "name": "What if Kvick ID is hacked?", "acceptedAnswer": {"@type": "Answer", "text": "Identity documents cannot be exposed, because Kvick ID never stores them. Status signatures cannot be forged, because the signing keys are kept separate from the data. What an attacker could reach is limited to basic account details and verification status."}},
+    {"@type": "Question", "name": "Can I delete my Kvick ID?", "acceptedAnswer": {"@type": "Answer", "text": "Yes, you will be able to close your account. Some records of past sharing may need to be kept for legally required periods, because regulated platforms relied on them for their own decisions. Details will be spelled out in plain language before launch."}},
+    {"@type": "Question", "name": "I received an email claiming to be from Kvick ID. How do I check?", "acceptedAnswer": {"@type": "Answer", "text": "Real Kvick ID emails only link to kvickid.com addresses, and we never ask for identity documents, passwords, or payment by email. If you are unsure, forward the message to contact@kvickid.com and we will confirm or deny that it came from us."}}
+  ]
+}
+</script>
+
+<script>
+  const hd = document.getElementById("hd");
+  addEventListener("scroll", () => hd.classList.toggle("scrolled", scrollY > 8), { passive: true });
+
+  const reduce = matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const risers = document.querySelectorAll(".rise");
+  if (reduce || !("IntersectionObserver" in window)) {
+    risers.forEach(el => el.classList.add("in"));
+  } else {
+    const io = new IntersectionObserver(entries => {
+      for (const e of entries) {
+        if (e.isIntersecting) {
+          const d = Number(e.target.dataset.d || 0);
+          setTimeout(() => e.target.classList.add("in"), 90 * d);
+          io.unobserve(e.target);
+        }
+      }
+    }, { threshold: 0.1 });
+    risers.forEach(el => io.observe(el));
+  }
+</script>
+</body>
+</html>

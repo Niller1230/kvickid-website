@@ -86,15 +86,23 @@
   header.scrolled { border-bottom-color: var(--line); }
   .header-in {
     display: flex; align-items: center; justify-content: space-between;
-    padding-block: 0.9rem;
+    padding-block: 0.9rem; gap: 1rem;
   }
   .mark { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; color: var(--ink); }
   .mark svg { display: block; }
-  nav.site { display: flex; gap: 1.75rem; font-size: 0.95rem; font-weight: 500; }
+  .nav-side { display: flex; align-items: center; gap: 1.4rem; }
+  nav.site { display: flex; gap: 1.4rem; font-size: 0.95rem; font-weight: 500; }
   nav.site a { text-decoration: none; color: var(--ink-soft); transition: color .2s ease; }
   nav.site a:hover { color: var(--ink); }
+  .login-link {
+    text-decoration: none; font-weight: 700; font-size: 0.9rem; color: var(--ink);
+    border: 1.5px solid color-mix(in oklab, var(--accent) 55%, transparent);
+    padding: 0.42rem 0.95rem; border-radius: 8px;
+    transition: border-color .18s ease, background .18s ease;
+  }
+  .login-link:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 10%, transparent); }
   nav.site a:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
-  @media (max-width: 640px) { nav.site { display: none; } }
+  @media (max-width: 700px) { nav.site { display: none; } }
 
   /* ---------- hero ---------- */
   .hero { background: var(--bg); color: var(--ink); overflow: clip; }
@@ -264,11 +272,15 @@
       <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="10" fill="var(--surface-2)" stroke="var(--accent)" stroke-width="3"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       Kvick&nbsp;ID
     </a>
-    <nav class="site" aria-label="Site">
-      <a href="#how">How it works</a>
-      <a href="#receive">Data handling</a>
-      <a href="mailto:contact@kvickid.com">Contact</a>
-    </nav>
+    <div class="nav-side">
+      <nav class="site" aria-label="Site">
+        <a href="#how">How it works</a>
+        <a href="#receive">Data handling</a>
+        <a href="/faq.html">FAQ</a>
+        <a href="mailto:contact@kvickid.com">Contact</a>
+      </nav>
+      <a class="login-link" href="/login.html">Log in</a>
+    </div>
   </div>
 </header>
 
@@ -424,7 +436,7 @@
         <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="3" opacity=".8"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".9"/></svg>
         Kvick&nbsp;ID
       </a>
-      <p class="foot-contact">Questions, pilots, or verifying an email you received:<br><a href="mailto:contact@kvickid.com">contact@kvickid.com</a></p>
+      <p class="foot-contact">Questions, pilots, or verifying an email you received:<br><a href="mailto:contact@kvickid.com">contact@kvickid.com</a> · <a href="/faq.html">Read the FAQ</a></p>
     </div>
     <div class="foot-line">
       <span>Kvick ID · in development · all example data on this page is synthetic</span>

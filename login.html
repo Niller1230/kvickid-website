@@ -1,0 +1,128 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Log in to Kvick ID</title>
+<meta name="description" content="Log in to Kvick ID. Personal accounts are in development and not yet open.">
+<meta name="theme-color" content="#0d1013">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='10' fill='%231c2126' stroke='%2335e0a0' stroke-width='3'/%3E%3Cpath d='M20 16v32M20 34l16-18M22 32l16 16' stroke='%2335e0a0' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<style>
+  @font-face {
+    font-family: "Schibsted Grotesk";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("/fonts/schibsted-grotesk.woff2") format("woff2");
+  }
+</style>
+<style>
+  :root {
+    --bg: #0d1013;
+    --bg-deep: #08090b;
+    --surface: #14181c;
+    --surface-2: #1c2126;
+    --line: #2a3138;
+    --ink: #edf1f3;
+    --ink-soft: #93a0aa;
+    --accent: #35e0a0;
+    --accent-ink: #08150f;
+  }
+  @supports (color: oklch(50% 0 0)) {
+    :root {
+      --bg: oklch(0.14 0.010 250);
+      --bg-deep: oklch(0.09 0.008 250);
+      --surface: oklch(0.185 0.010 250);
+      --surface-2: oklch(0.235 0.012 250);
+      --line: oklch(0.32 0.015 250);
+      --ink: oklch(0.95 0.005 250);
+      --ink-soft: oklch(0.68 0.02 250);
+      --accent: oklch(0.78 0.17 152);
+      --accent-ink: oklch(0.14 0.03 152);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+
+  body {
+    font-family: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--bg);
+    min-height: 100dvh;
+    display: flex; flex-direction: column;
+    text-rendering: optimizeLegibility;
+  }
+  h1 { line-height: 1.14; text-wrap: balance; font-weight: 700; }
+  p { text-wrap: pretty; }
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 1060px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); width: 100%; }
+
+  header { border-bottom: 1px solid transparent; }
+  .header-in { display: flex; align-items: center; justify-content: space-between; padding-block: 0.9rem; }
+  .mark { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; color: var(--ink); }
+  .mark svg { display: block; }
+  .back { text-decoration: none; font-size: 0.95rem; font-weight: 500; color: var(--ink-soft); transition: color .2s ease; }
+  .back:hover { color: var(--ink); }
+
+  main { flex: 1; display: grid; place-items: center; padding-block: clamp(2.5rem, 8vw, 5rem); }
+  .panel {
+    width: min(100%, 34rem);
+    margin-inline: auto;
+    border: 1.5px solid var(--line);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: clamp(1.75rem, 5vw, 2.6rem);
+  }
+  .panel h1 { font-size: clamp(1.6rem, 3.5vw, 2.1rem); letter-spacing: -0.015em; margin-bottom: 1rem; }
+  .panel p { color: var(--ink-soft); }
+  .panel p + p { margin-top: 0.8rem; }
+  .panel strong { color: var(--ink); font-weight: 500; }
+  .panel a { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); text-underline-offset: 3px; }
+  .panel a:hover { text-decoration-color: var(--accent); }
+  .note {
+    margin-top: 1.5rem; padding-top: 1.3rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.95rem;
+  }
+
+  footer { padding-block: 1.5rem; border-top: 1px solid var(--line); }
+  .foot-line { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; justify-content: space-between; font-size: 0.85rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-in">
+    <a class="mark" href="/" aria-label="Kvick ID home">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="10" fill="var(--surface-2)" stroke="var(--accent)" stroke-width="3"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      Kvick&nbsp;ID
+    </a>
+    <a class="back" href="/">Back to front page</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="panel">
+      <h1>Personal accounts are not open yet.</h1>
+      <p>Kvick ID is in development and currently runs in a closed pilot on synthetic test data. There is nothing to sign in to on this website yet.</p>
+      <p>When personal accounts launch, this page is where you will log in, and it will always live at <strong>kvickid.com</strong>.</p>
+      <p class="note">If an email or another website asked you to log in to Kvick ID today, do not enter anything. Forward the message to <a href="mailto:contact@kvickid.com">contact@kvickid.com</a> and we will confirm or deny that it came from us.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-line">
+    <span>Kvick ID · in development</span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
