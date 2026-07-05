@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Sign up for Kvick ID</title>
+<meta name="description" content="Create a Kvick ID: verify once, reuse with consent. Accounts are opening soon.">
+<meta name="theme-color" content="#0d1013">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='10' fill='%231c2126' stroke='%2335e0a0' stroke-width='3'/%3E%3Cpath d='M20 16v32M20 34l16-18M22 32l16 16' stroke='%2335e0a0' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<style>
+  @font-face {
+    font-family: "Schibsted Grotesk";
+    font-style: normal;
+    font-weight: 400 700;
+    font-display: swap;
+    src: url("/fonts/schibsted-grotesk.woff2") format("woff2");
+  }
+</style>
+<style>
+  :root {
+    --bg: #0d1013;
+    --bg-deep: #08090b;
+    --surface: #14181c;
+    --surface-2: #1c2126;
+    --line: #2a3138;
+    --ink: #edf1f3;
+    --ink-soft: #93a0aa;
+    --accent: #35e0a0;
+    --accent-ink: #08150f;
+  }
+  @supports (color: oklch(50% 0 0)) {
+    :root {
+      --bg: oklch(0.14 0.010 250);
+      --bg-deep: oklch(0.09 0.008 250);
+      --surface: oklch(0.185 0.010 250);
+      --surface-2: oklch(0.235 0.012 250);
+      --line: oklch(0.32 0.015 250);
+      --ink: oklch(0.95 0.005 250);
+      --ink-soft: oklch(0.68 0.02 250);
+      --accent: oklch(0.78 0.17 152);
+      --accent-ink: oklch(0.14 0.03 152);
+    }
+  }
+
+  * { box-sizing: border-box; margin: 0; }
+
+  body {
+    font-family: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
+    font-size: 1.0625rem;
+    line-height: 1.65;
+    color: var(--ink);
+    background: var(--bg);
+    min-height: 100dvh;
+    display: flex; flex-direction: column;
+    text-rendering: optimizeLegibility;
+  }
+  h1 { line-height: 1.14; text-wrap: balance; font-weight: 700; }
+  p { text-wrap: pretty; }
+  a { color: inherit; }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
+  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+
+  .wrap { max-width: 1060px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); width: 100%; }
+
+  header { border-bottom: 1px solid transparent; }
+  .header-in { display: flex; align-items: center; justify-content: space-between; padding-block: 0.9rem; }
+  .mark { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; color: var(--ink); }
+  .mark svg { display: block; }
+  .back { text-decoration: none; font-size: 0.95rem; font-weight: 500; color: var(--ink-soft); transition: color .2s ease; }
+  .back:hover { color: var(--ink); }
+
+  main { flex: 1; display: grid; place-items: center; padding-block: clamp(2.5rem, 8vw, 5rem); }
+  .panel {
+    width: min(100%, 38rem);
+    margin-inline: auto;
+    border: 1.5px solid var(--line);
+    background: var(--surface);
+    border-radius: 12px;
+    padding: clamp(1.75rem, 5vw, 2.8rem);
+  }
+  .badge {
+    display: inline-flex; align-items: center; gap: 0.45rem;
+    font-size: 0.85rem; font-weight: 600; color: var(--accent);
+    background: color-mix(in oklab, var(--accent) 12%, transparent);
+    border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
+    padding: 0.3rem 0.7rem; border-radius: 999px; margin-bottom: 1.1rem;
+  }
+  .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
+  .panel h1 { font-size: clamp(1.7rem, 3.8vw, 2.3rem); letter-spacing: -0.02em; margin-bottom: 1rem; }
+  .panel p { color: var(--ink-soft); }
+  .panel p + p { margin-top: 0.8rem; }
+  .panel strong { color: var(--ink); font-weight: 500; }
+  .panel a:not(.btn) { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); text-underline-offset: 3px; }
+  .panel a:not(.btn):hover { text-decoration-color: var(--accent); }
+
+  .steps { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; gap: 0; }
+  .steps li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.9rem; padding-block: 0.9rem; color: var(--ink-soft); }
+  .steps li + li { border-top: 1px solid var(--line); }
+  .steps .n { font-weight: 700; color: var(--accent); font-family: "Schibsted Grotesk", sans-serif; }
+  .steps strong { color: var(--ink); font-weight: 600; }
+
+  .cta { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; }
+  .btn {
+    display: inline-block; text-decoration: none; font-weight: 700; font-size: 1rem;
+    padding: 0.8rem 1.5rem; border-radius: 8px;
+    background: var(--accent); color: var(--accent-ink);
+    transition: transform .18s cubic-bezier(.22,1,.36,1), filter .18s ease;
+  }
+  .btn:hover { transform: translateY(-1px); filter: brightness(1.04); }
+  .cta .side { color: var(--ink-soft); font-size: 0.95rem; }
+
+  .note {
+    margin-top: 1.5rem; padding-top: 1.3rem;
+    border-top: 1px solid var(--line);
+    font-size: 0.9rem; color: var(--ink-soft);
+  }
+
+  footer { padding-block: 1.5rem; border-top: 1px solid var(--line); }
+  .foot-line { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; justify-content: space-between; font-size: 0.85rem; color: var(--ink-soft); }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap header-in">
+    <a class="mark" href="/" aria-label="Kvick ID home">
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="10" fill="var(--surface-2)" stroke="var(--accent)" stroke-width="3"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      Kvick&nbsp;ID
+    </a>
+    <a class="back" href="/">Back to front page</a>
+  </div>
+</header>
+
+<main>
+  <div class="wrap">
+    <div class="panel">
+      <span class="badge"><span class="dot" aria-hidden="true"></span>Opening soon</span>
+      <h1>Your Kvick ID is almost ready.</h1>
+      <p>Kvick ID lets you verify your identity once and reuse that status at any participating platform, with your consent each time. We are in development and opening accounts to the first users shortly. Sign-up is not live on this site yet.</p>
+
+      <ol class="steps">
+        <li><span class="n" aria-hidden="true">1</span><span><strong>Create your account.</strong> Just a username and email to start. Nothing more until you choose to verify.</span></li>
+        <li><span class="n" aria-hidden="true">2</span><span><strong>Verify once.</strong> A specialist provider checks your ID. Kvick ID keeps the result, never the documents.</span></li>
+        <li><span class="n" aria-hidden="true">3</span><span><strong>Reuse with consent.</strong> When a platform asks, you approve or decline. Nothing is shared until you say yes.</span></li>
+      </ol>
+
+      <div class="cta">
+        <a class="btn" href="mailto:contact@kvickid.com?subject=Notify%20me%20when%20Kvick%20ID%20opens">Tell me when it opens</a>
+        <span class="side">We will email you the moment sign-up goes live.</span>
+      </div>
+
+      <p class="note">Only ever sign up or log in at <strong>kvickid.com</strong>. We never ask for identity documents, passwords, or payment by email. Unsure about a message? Forward it to <a href="mailto:contact@kvickid.com">contact@kvickid.com</a> and we will confirm or deny that it came from us.</p>
+    </div>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap foot-line">
+    <span>Kvick ID · in development · all example data on this site is synthetic</span>
+    <span>© 2026</span>
+  </div>
+</footer>
+
+</body>
+</html>
