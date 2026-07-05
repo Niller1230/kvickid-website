@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Kvick ID — Verify once. Reuse with consent.</title>
 <meta name="description" content="Kvick ID is a European identity layer for regulated platforms. A person completes KYC once; participating platforms confirm the status — never the documents — with the person's consent each time.">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%232B3BBB'/%3E%3Cpath d='M20 16v32M20 34l16-18M22 32l16 16' stroke='white' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
+<meta name="theme-color" content="#0d1013">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect x='2' y='2' width='60' height='60' rx='10' fill='%231c2126' stroke='%2335e0a0' stroke-width='3'/%3E%3Cpath d='M20 16v32M20 34l16-18M22 32l16 16' stroke='%2335e0a0' stroke-width='6' stroke-linecap='round' stroke-linejoin='round' fill='none'/%3E%3C/svg%3E">
 <style>
   /* Self-hosted fonts — no external host is contacted (privacy: no visitor
      IP is disclosed to a third party; integrity: no CDN dependency). Both
@@ -28,33 +29,30 @@
 <style>
   :root {
     /* Fallbacks for engines without OKLCH */
-    --brand: #2B3BBB;
-    --brand-ink: #10175c;
-    --on-brand: #f4f5ff;
-    --on-brand-soft: #c9cfff;
-    --bg: #fafafe;
-    --surface: #ffffff;
-    --ink: #191d33;
-    --ink-soft: #4c5270;
-    --line: #e2e4f0;
-    --card-navy: #141a45;
-    --card-line: #333d7e;
-    --ok: #1d7a4f;
+    --bg: #0d1013;
+    --bg-deep: #08090b;
+    --surface: #14181c;
+    --surface-2: #1c2126;
+    --line: #2a3138;
+    --ink: #edf1f3;
+    --ink-soft: #93a0aa;
+    --accent: #35e0a0;
+    --accent-ink: #08150f;
   }
   @supports (color: oklch(50% 0 0)) {
     :root {
-      --brand: oklch(0.44 0.21 268);
-      --brand-ink: oklch(0.30 0.15 268);
-      --on-brand: oklch(0.97 0.01 268);
-      --on-brand-soft: oklch(0.85 0.06 268);
-      --bg: oklch(0.985 0.004 268);
-      --surface: oklch(1 0 0);
-      --ink: oklch(0.24 0.035 268);
-      --ink-soft: oklch(0.44 0.04 268);
-      --line: oklch(0.91 0.012 268);
-      --card-navy: oklch(0.25 0.09 268);
-      --card-line: oklch(0.38 0.10 268);
-      --ok: oklch(0.52 0.12 160);
+      /* Dark, technical, restrained — one signature accent (green = verified)
+         carries every interactive and status moment; the rest of the page
+         stays a calm, tinted-neutral dark so the accent never has to compete. */
+      --bg: oklch(0.14 0.010 250);
+      --bg-deep: oklch(0.09 0.008 250);
+      --surface: oklch(0.185 0.010 250);
+      --surface-2: oklch(0.235 0.012 250);
+      --line: oklch(0.32 0.015 250);
+      --ink: oklch(0.95 0.005 250);
+      --ink-soft: oklch(0.68 0.02 250);
+      --accent: oklch(0.78 0.17 152);
+      --accent-ink: oklch(0.14 0.03 152);
     }
   }
 
@@ -65,22 +63,22 @@
   body {
     font-family: "Schibsted Grotesk", "Helvetica Neue", Arial, sans-serif;
     font-size: 1.0625rem;
-    line-height: 1.6;
+    line-height: 1.65;
     color: var(--ink);
     background: var(--bg);
     text-rendering: optimizeLegibility;
   }
-  h1, h2, h3 { line-height: 1.12; text-wrap: balance; font-weight: 700; }
+  h1, h2, h3 { line-height: 1.14; text-wrap: balance; font-weight: 700; }
   p { text-wrap: pretty; }
   a { color: inherit; }
-  ::selection { background: var(--brand); color: var(--on-brand); }
+  ::selection { background: var(--accent); color: var(--accent-ink); }
 
   .wrap { max-width: 1060px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); }
 
   /* ---------- header ---------- */
   header {
     position: sticky; top: 0; z-index: 40;
-    background: color-mix(in oklab, var(--bg) 88%, transparent);
+    background: color-mix(in oklab, var(--bg) 86%, transparent);
     backdrop-filter: blur(10px);
     border-bottom: 1px solid transparent;
     transition: border-color .3s ease;
@@ -90,16 +88,16 @@
     display: flex; align-items: center; justify-content: space-between;
     padding-block: 0.9rem;
   }
-  .mark { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; }
+  .mark { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-weight: 700; font-size: 1.15rem; letter-spacing: -0.01em; color: var(--ink); }
   .mark svg { display: block; }
   nav.site { display: flex; gap: 1.75rem; font-size: 0.95rem; font-weight: 500; }
   nav.site a { text-decoration: none; color: var(--ink-soft); transition: color .2s ease; }
   nav.site a:hover { color: var(--ink); }
-  nav.site a:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--brand); outline-offset: 3px; border-radius: 2px; }
+  nav.site a:focus-visible, a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
   @media (max-width: 640px) { nav.site { display: none; } }
 
   /* ---------- hero ---------- */
-  .hero { background: var(--brand); color: var(--on-brand); overflow: clip; }
+  .hero { background: var(--bg); color: var(--ink); overflow: clip; }
   .hero-in {
     display: grid; grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
     gap: clamp(2rem, 6vw, 5rem); align-items: center;
@@ -112,69 +110,71 @@
   }
   .hero .dek {
     font-size: clamp(1.1rem, 1.6vw, 1.25rem);
-    line-height: 1.55;
+    line-height: 1.6;
     max-width: 34em;
-    color: var(--on-brand);
+    color: var(--ink-soft);
   }
-  .hero .dek strong { font-weight: 700; }
+  .hero .dek strong { font-weight: 700; color: var(--ink); }
   .hero-actions { display: flex; flex-wrap: wrap; gap: 0.9rem; margin-top: 2.2rem; }
   .btn {
     display: inline-block; text-decoration: none; font-weight: 700; font-size: 1rem;
-    padding: 0.8rem 1.5rem; border-radius: 10px;
-    transition: transform .18s cubic-bezier(.22,1,.36,1), background .18s ease, color .18s ease;
+    padding: 0.8rem 1.5rem; border-radius: 8px;
+    transition: transform .18s cubic-bezier(.22,1,.36,1), background .18s ease, color .18s ease, border-color .18s ease;
   }
   .btn:active { transform: translateY(1px); }
-  .btn-solid { background: var(--on-brand); color: var(--brand-ink); }
+  .btn-solid { background: var(--accent); color: var(--accent-ink); }
   .btn-solid:hover { transform: translateY(-1px); }
-  .btn-ghost { color: var(--on-brand); border: 1.5px solid color-mix(in oklab, var(--on-brand) 45%, transparent); }
-  .btn-ghost:hover { border-color: var(--on-brand); }
+  .btn-ghost { color: var(--ink); border: 1.5px solid color-mix(in oklab, var(--accent) 55%, transparent); }
+  .btn-ghost:hover { border-color: var(--accent); background: color-mix(in oklab, var(--accent) 10%, transparent); }
 
   /* the status-card object */
   .vault { position: relative; }
   .vault-card {
-    background: var(--card-navy);
-    border: 1px solid var(--card-line);
-    border-radius: 18px;
+    background: var(--surface-2);
+    border: 1px solid var(--line);
+    border-radius: 12px;
     padding: 1.6rem 1.7rem 1.4rem;
-    color: var(--on-brand);
-    box-shadow: 0 30px 70px -30px rgb(0 0 20 / 0.55);
+    color: var(--ink);
+    box-shadow: 0 30px 70px -30px rgb(0 0 0 / 0.65);
     max-width: 26rem;
     margin-inline: auto;
     rotate: 1.5deg;
   }
   .vault-card .row1 { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 1.35rem; }
   .vault-card .holder { font-weight: 700; font-size: 1.15rem; }
-  .vault-card .brand-tag { display: flex; align-items: center; gap: .45rem; font-weight: 700; font-size: .9rem; opacity: .9; }
+  .vault-card .brand-tag { display: flex; align-items: center; gap: .45rem; font-weight: 700; font-size: .9rem; color: var(--ink-soft); }
   .vault-status { display: flex; align-items: center; gap: 0.55rem; font-weight: 500; font-size: 1rem; }
-  .vault-status .dot { width: 9px; height: 9px; border-radius: 50%; background: #55d68e; box-shadow: 0 0 0 4px rgb(85 214 142 / 0.18); }
+  .vault-status .dot { width: 9px; height: 9px; border-radius: 50%; background: var(--accent); box-shadow: 0 0 0 4px color-mix(in oklab, var(--accent) 22%, transparent); }
   .vault-meta {
     display: grid; grid-template-columns: 1fr 1fr; gap: 0.9rem 1.2rem;
     margin-top: 1.3rem; padding-top: 1.15rem;
-    border-top: 1px solid var(--card-line);
+    border-top: 1px solid var(--line);
     font-size: 0.82rem; line-height: 1.45;
   }
-  .vault-meta dt { color: var(--on-brand-soft); font-weight: 500; }
+  .vault-meta dt { color: var(--ink-soft); font-weight: 500; }
   .vault-meta dd { font-weight: 500; }
   .vault-sig {
     margin-top: 1.2rem; font-family: "Spline Sans Mono", monospace; font-size: 0.7rem;
-    color: var(--on-brand-soft); overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
+    color: var(--ink-soft); overflow: hidden; white-space: nowrap; text-overflow: ellipsis;
   }
-  .vault-note { text-align: center; font-size: 0.85rem; color: var(--on-brand); opacity: 0.92; margin-top: 1.1rem; }
+  .vault-note { text-align: center; font-size: 0.85rem; color: var(--ink-soft); margin-top: 1.1rem; }
 
   /* ---------- email-trust checkpoint ---------- */
   .checkpoint { padding-block: clamp(3rem, 7vw, 4.5rem); }
   .checkpoint-panel {
     border: 1.5px solid var(--line);
     background: var(--surface);
-    border-radius: 16px;
+    border-radius: 12px;
     padding: clamp(1.5rem, 4vw, 2.4rem);
     display: grid; grid-template-columns: auto 1fr; gap: clamp(1.2rem, 3vw, 2rem);
     align-items: start;
   }
   .checkpoint h2 { font-size: clamp(1.4rem, 2.6vw, 1.8rem); margin-bottom: 0.7rem; letter-spacing: -0.01em; }
   .checkpoint ul { padding-left: 1.1rem; margin-top: 0.8rem; display: grid; gap: 0.45rem; }
-  .checkpoint li::marker { color: var(--brand); }
-  .checkpoint .glyph { color: var(--brand); margin-top: .3rem; }
+  .checkpoint li::marker { color: var(--accent); }
+  .checkpoint .glyph { color: var(--accent); margin-top: .3rem; }
+  .checkpoint a, .foot-contact a, .standing a { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); text-underline-offset: 3px; }
+  .checkpoint a:hover, .foot-contact a:hover, .standing a:hover { text-decoration-color: var(--accent); }
   @media (max-width: 640px) { .checkpoint-panel { grid-template-columns: 1fr; } .checkpoint .glyph { display: none; } }
 
   /* ---------- how it works ---------- */
@@ -188,8 +188,9 @@
   }
   .flow li + li { border-top: 1px solid var(--line); }
   .flow .n {
-    font-weight: 700; font-size: 1.5rem; color: var(--brand);
+    font-weight: 700; font-size: 1.5rem; color: var(--accent);
     font-variant-numeric: tabular-nums;
+    font-family: "Spline Sans Mono", monospace;
     line-height: 1.25;
   }
   .flow h3 { font-size: 1.2rem; margin-bottom: 0.35rem; letter-spacing: -0.01em; }
@@ -206,26 +207,27 @@
     .vault-card { rotate: 0deg; max-width: 100%; }
   }
   .payload {
-    background: var(--card-navy); color: var(--on-brand);
-    border-radius: 14px; padding: 1.4rem 1.5rem;
+    background: var(--surface-2); color: var(--ink);
+    border: 1px solid var(--line);
+    border-radius: 10px; padding: 1.4rem 1.5rem;
     font-family: "Spline Sans Mono", monospace; font-size: 0.85rem; line-height: 1.75;
     overflow-x: auto;
-    box-shadow: 0 20px 50px -30px rgb(0 0 20 / 0.4);
+    box-shadow: 0 20px 50px -30px rgb(0 0 0 / 0.5);
   }
-  .payload .k { color: var(--on-brand-soft); }
-  .payload .v { color: #9fe8c0; }
-  .payload .c { color: color-mix(in oklab, var(--on-brand) 45%, transparent); }
+  .payload .k { color: var(--ink-soft); }
+  .payload .v { color: var(--accent); }
+  .payload .c { color: color-mix(in oklab, var(--ink) 40%, transparent); }
   .receive .never { margin-top: 0; }
   .receive .never h3 { font-size: 1.15rem; margin-bottom: 0.9rem; }
   .never ul { list-style: none; padding: 0; display: grid; gap: 0.85rem; }
   .never li { display: grid; grid-template-columns: 1.5rem 1fr; gap: 0.6rem; color: var(--ink-soft); }
   .never li strong { color: var(--ink); font-weight: 500; }
-  .never .x { color: var(--brand); font-weight: 700; text-align: center; }
+  .never .x { color: var(--ink-soft); font-weight: 700; text-align: center; }
   .receive .after { margin-top: 1.6rem; color: var(--ink-soft); max-width: 56ch; }
 
   /* ---------- where this stands ---------- */
   .standing { padding-block: clamp(3.5rem, 8vw, 6rem); }
-  .standing .lede { font-size: clamp(1.1rem, 1.8vw, 1.3rem); line-height: 1.6; max-width: 42em; }
+  .standing .lede { font-size: clamp(1.1rem, 1.8vw, 1.3rem); line-height: 1.6; color: var(--ink-soft); max-width: 42em; }
   .standing dl {
     margin-top: clamp(2rem, 4vw, 2.75rem);
     display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
@@ -235,17 +237,14 @@
   .standing dd { color: var(--ink-soft); font-size: 0.98rem; line-height: 1.55; }
 
   /* ---------- footer ---------- */
-  footer { background: var(--brand-ink); color: var(--on-brand); padding-block: clamp(2.5rem, 6vw, 4rem) 2rem; }
+  footer { background: var(--bg-deep); color: var(--ink); padding-block: clamp(2.5rem, 6vw, 4rem) 2rem; border-top: 1px solid var(--line); }
   .foot-top { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 2rem; align-items: flex-start; }
-  .foot-top .mark { color: var(--on-brand); }
-  .foot-contact { font-size: 1.05rem; }
-  .foot-contact a { color: var(--on-brand); text-decoration-color: color-mix(in oklab, var(--on-brand) 40%, transparent); text-underline-offset: 4px; }
-  .foot-contact a:hover { text-decoration-color: var(--on-brand); }
+  .foot-contact { font-size: 1.05rem; color: var(--ink-soft); }
   .foot-line {
     margin-top: 2.5rem; padding-top: 1.4rem;
-    border-top: 1px solid color-mix(in oklab, var(--on-brand) 18%, transparent);
+    border-top: 1px solid var(--line);
     display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; justify-content: space-between;
-    font-size: 0.85rem; color: var(--on-brand-soft);
+    font-size: 0.85rem; color: var(--ink-soft);
   }
 
   /* ---------- motion ---------- */
@@ -262,7 +261,7 @@
 <header id="hd">
   <div class="wrap header-in">
     <a class="mark" href="#top" aria-label="Kvick ID home">
-      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="var(--brand)"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--on-brand)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+      <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="10" fill="var(--surface-2)" stroke="var(--accent)" stroke-width="3"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
       Kvick&nbsp;ID
     </a>
     <nav class="site" aria-label="Site">
@@ -289,7 +288,7 @@
         <div class="vault-card" role="img" aria-label="Example of a Kvick ID status card: verified at standard level, with provider and validity dates — sample data">
           <div class="row1">
             <span class="holder">M. Andersen</span>
-            <span class="brand-tag"><svg width="18" height="18" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="var(--on-brand)" opacity=".16"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--on-brand)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>Kvick&nbsp;ID</span>
+            <span class="brand-tag"><svg width="18" height="18" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="10" fill="none" stroke="var(--accent)" stroke-width="4" opacity=".55"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".9"/></svg>Kvick&nbsp;ID</span>
           </div>
           <div class="vault-status"><span class="dot" aria-hidden="true"></span>Verified · standard level</div>
           <dl class="vault-meta">
@@ -422,7 +421,7 @@
   <div class="wrap">
     <div class="foot-top">
       <a class="mark" href="#top" aria-label="Back to top">
-        <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="14" fill="var(--on-brand)" opacity=".14"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--on-brand)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none"/></svg>
+        <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect x="2" y="2" width="60" height="60" rx="10" fill="var(--surface)" stroke="var(--accent)" stroke-width="3" opacity=".8"/><path d="M20 16v32M20 34l16-18M22 32l16 16" stroke="var(--accent)" stroke-width="6" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity=".9"/></svg>
         Kvick&nbsp;ID
       </a>
       <p class="foot-contact">Questions, pilots, or verifying an email you received:<br><a href="mailto:contact@kvickid.com">contact@kvickid.com</a></p>
