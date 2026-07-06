@@ -3,8 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sign up for Kvick ID</title>
-<meta name="description" content="Create a Kvick ID: verify once, reuse with consent. Accounts are opening soon.">
+<title>Get early access to Kvick ID</title>
+<meta name="description" content="Kvick ID lets you verify once and reuse it everywhere with your consent. We're building it now. Leave your email to follow along and be first in when sign-up opens.">
 <meta name="theme-color" content="#0d1013">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='6' fill='%234A9C4A'/%3E%3Ctext x='33' y='51' font-family='Helvetica Neue, Arial, sans-serif' font-weight='700' font-size='51' fill='%23FFFFFF' text-anchor='middle'%3EK%3C/text%3E%3C/svg%3E">
 <style>
@@ -53,12 +53,13 @@
     min-height: 100dvh;
     display: flex; flex-direction: column;
     text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
   }
-  h1 { line-height: 1.14; text-wrap: balance; font-weight: 700; }
+  h1 { line-height: 1.12; text-wrap: balance; font-weight: 700; }
   p { text-wrap: pretty; }
   a { color: inherit; }
   ::selection { background: var(--accent); color: var(--accent-ink); }
-  a:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
+  :focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 2px; }
 
   .wrap { max-width: 1060px; margin-inline: auto; padding-inline: clamp(1.25rem, 4vw, 2.5rem); width: 100%; }
 
@@ -70,53 +71,117 @@
   .back:hover { color: var(--ink); }
 
   main { flex: 1; display: grid; place-items: center; padding-block: clamp(2.5rem, 8vw, 5rem); }
+
+  /* Soft green glow behind the panel, echoing the brand banner */
+  .stage { position: relative; width: min(100%, 40rem); margin-inline: auto; }
+  .stage::before {
+    content: ""; position: absolute; inset: -25% -10% auto; height: 60%;
+    background: radial-gradient(60% 100% at 50% 0%, color-mix(in oklab, var(--accent) 16%, transparent), transparent 70%);
+    filter: blur(10px); z-index: 0; pointer-events: none;
+  }
   .panel {
-    width: min(100%, 38rem);
-    margin-inline: auto;
+    position: relative; z-index: 1;
     border: 1.5px solid var(--line);
     background: var(--surface);
-    border-radius: 12px;
+    border-radius: 14px;
     padding: clamp(1.75rem, 5vw, 2.8rem);
   }
+
   .badge {
     display: inline-flex; align-items: center; gap: 0.45rem;
     font-size: 0.85rem; font-weight: 600; color: var(--accent);
     background: color-mix(in oklab, var(--accent) 12%, transparent);
     border: 1px solid color-mix(in oklab, var(--accent) 30%, transparent);
-    padding: 0.3rem 0.7rem; border-radius: 999px; margin-bottom: 1.1rem;
+    padding: 0.3rem 0.7rem; border-radius: 999px; margin-bottom: 1.2rem;
   }
-  .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
-  .panel h1 { font-size: clamp(1.7rem, 3.8vw, 2.3rem); letter-spacing: -0.02em; margin-bottom: 1rem; }
-  .panel p { color: var(--ink-soft); }
-  .panel p + p { margin-top: 0.8rem; }
-  .panel strong { color: var(--ink); font-weight: 500; }
-  .panel a:not(.btn) { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); text-underline-offset: 3px; }
-  .panel a:not(.btn):hover { text-decoration-color: var(--accent); }
+  .badge .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent);
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent); animation: pulse 2.6s ease-out infinite; }
+  @keyframes pulse { 0% { box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 55%, transparent); } 70%,100% { box-shadow: 0 0 0 7px transparent; } }
 
-  .steps { list-style: none; padding: 0; margin: 1.4rem 0 0; display: grid; gap: 0; }
-  .steps li { display: grid; grid-template-columns: 2.2rem 1fr; gap: 0.9rem; padding-block: 0.9rem; color: var(--ink-soft); }
-  .steps li + li { border-top: 1px solid var(--line); }
-  .steps .n { font-weight: 700; color: var(--accent); font-family: "Schibsted Grotesk", sans-serif; }
-  .steps strong { color: var(--ink); font-weight: 600; }
+  .panel h1 { font-size: clamp(1.75rem, 4.2vw, 2.45rem); letter-spacing: -0.025em; margin-bottom: 0.9rem; }
+  .lede { color: var(--ink-soft); max-width: 46ch; }
+  .lede strong { color: var(--ink); font-weight: 500; }
 
-  .cta { margin-top: 1.6rem; display: flex; flex-wrap: wrap; gap: 0.8rem; align-items: center; }
+  /* Form */
+  form { margin-top: 1.7rem; display: grid; gap: 1rem; }
+  .field { display: grid; gap: 0.4rem; }
+  .field label { font-size: 0.85rem; font-weight: 600; color: var(--ink-soft); letter-spacing: 0.01em; }
+  .field label .opt { font-weight: 400; color: var(--ink-soft); opacity: 0.7; }
+  .field input[type="email"], .field input[type="text"] {
+    font: inherit; font-size: 1rem; color: var(--ink);
+    background: var(--surface-2);
+    border: 1.5px solid var(--line);
+    border-radius: 9px;
+    padding: 0.8rem 0.95rem;
+    transition: border-color .18s ease, box-shadow .18s ease;
+  }
+  .field input::placeholder { color: color-mix(in oklab, var(--ink-soft) 78%, transparent); }
+  .field input:focus-visible {
+    outline: none; border-color: var(--accent);
+    box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 22%, transparent);
+  }
+
+  /* Consent */
+  .consent { display: grid; grid-template-columns: auto 1fr; gap: 0.7rem; align-items: start;
+    margin-top: 0.2rem; padding: 0.9rem 1rem; border: 1px solid var(--line); border-radius: 10px; background: color-mix(in oklab, var(--surface-2) 55%, transparent); }
+  .consent input { appearance: none; -webkit-appearance: none; margin: 0; cursor: pointer;
+    width: 1.25rem; height: 1.25rem; border: 1.6px solid var(--line); border-radius: 5px;
+    background: var(--surface); display: grid; place-items: center; transition: border-color .15s ease, background .15s ease; margin-top: 0.15rem; }
+  .consent input:checked { background: var(--accent); border-color: var(--accent); }
+  .consent input:checked::after { content: ""; width: 0.42rem; height: 0.72rem; border: solid var(--accent-ink); border-width: 0 2.5px 2.5px 0; transform: rotate(43deg) translateY(-1px); }
+  .consent input:focus-visible { outline: none; box-shadow: 0 0 0 3px color-mix(in oklab, var(--accent) 25%, transparent); }
+  .consent label { font-size: 0.92rem; color: var(--ink-soft); line-height: 1.5; cursor: pointer; }
+
   .btn {
-    display: inline-block; text-decoration: none; font-weight: 700; font-size: 1rem;
-    padding: 0.8rem 1.5rem; border-radius: 8px;
+    justify-self: start; margin-top: 0.3rem;
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    border: 0; cursor: pointer; text-decoration: none; font: inherit; font-weight: 700; font-size: 1rem;
+    padding: 0.85rem 1.6rem; border-radius: 9px;
     background: var(--accent); color: var(--accent-ink);
     transition: transform .18s cubic-bezier(.22,1,.36,1), filter .18s ease;
   }
-  .btn:hover { transform: translateY(-1px); filter: brightness(1.04); }
-  .cta .side { color: var(--ink-soft); font-size: 0.95rem; }
+  .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
+  .btn:active { transform: translateY(0); }
+  .btn:disabled { opacity: 0.6; cursor: default; transform: none; filter: none; }
+  .form-error { margin: 0.2rem 0 0; font-size: 0.92rem; color: #ff8a8a; }
+  .form-error a { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); }
+
+  /* Success state */
+  .done { display: none; }
+  .is-sent form, .is-sent .lede, .is-sent .idea, .is-sent > .badge, .is-sent > h1 { display: none; }
+  .is-sent .done { display: block; animation: rise .5s cubic-bezier(.22,1,.36,1) both; }
+  @keyframes rise { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: none; } }
+  .done .check { width: 3rem; height: 3rem; border-radius: 50%; display: grid; place-items: center; margin-bottom: 1.1rem;
+    background: color-mix(in oklab, var(--accent) 16%, transparent); border: 1.5px solid color-mix(in oklab, var(--accent) 40%, transparent); }
+  .done .check svg { width: 1.5rem; height: 1.5rem; }
+  .done h1 { font-size: clamp(1.6rem, 3.6vw, 2.1rem); letter-spacing: -0.02em; margin-bottom: 0.8rem; }
+  .done p { color: var(--ink-soft); max-width: 44ch; }
+  .done p + p { margin-top: 0.7rem; }
+  .done a { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); text-underline-offset: 3px; }
+
+  /* "Here's the idea" mini-steps */
+  .idea { margin-top: 2rem; padding-top: 1.6rem; border-top: 1px solid var(--line); }
+  .idea h2 { font-size: 0.8rem; font-weight: 600; letter-spacing: 0.04em; text-transform: uppercase; color: var(--ink-soft); margin-bottom: 1rem; }
+  .steps { list-style: none; padding: 0; margin: 0; display: grid; gap: 0; }
+  .steps li { display: grid; grid-template-columns: 1.9rem 1fr; gap: 0.9rem; padding-block: 0.85rem; color: var(--ink-soft); }
+  .steps li + li { border-top: 1px solid var(--line); }
+  .steps .n { font-weight: 700; color: var(--accent); }
+  .steps strong { color: var(--ink); font-weight: 600; }
 
   .note {
-    margin-top: 1.5rem; padding-top: 1.3rem;
-    border-top: 1px solid var(--line);
-    font-size: 0.9rem; color: var(--ink-soft);
+    margin-top: 1.5rem; padding-top: 1.3rem; border-top: 1px solid var(--line);
+    font-size: 0.88rem; color: var(--ink-soft); line-height: 1.6;
   }
+  .note strong { color: var(--ink); font-weight: 500; }
+  .note a { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); text-underline-offset: 3px; }
 
   footer { padding-block: 1.5rem; border-top: 1px solid var(--line); }
   .foot-line { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; justify-content: space-between; font-size: 0.85rem; color: var(--ink-soft); }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation: none !important; transition: none !important; }
+    html { scroll-behavior: auto; }
+  }
 </style>
 </head>
 <body>
@@ -133,33 +198,119 @@
 
 <main>
   <div class="wrap">
-    <div class="panel">
-      <span class="badge"><span class="dot" aria-hidden="true"></span>Opening soon</span>
-      <h1>Your Kvick ID is almost ready.</h1>
-      <p>Kvick ID lets you verify your identity once and reuse that status at any participating platform, with your consent each time. We are in development and opening accounts to the first users shortly. Sign-up is not live on this site yet.</p>
+    <div class="stage">
+      <div class="panel" id="panel">
 
-      <ol class="steps">
-        <li><span class="n" aria-hidden="true">1</span><span><strong>Create your account.</strong> Just a username and email to start. Nothing more until you choose to verify.</span></li>
-        <li><span class="n" aria-hidden="true">2</span><span><strong>Verify once.</strong> A specialist provider checks your ID. Kvick ID keeps the result, never the documents.</span></li>
-        <li><span class="n" aria-hidden="true">3</span><span><strong>Reuse with consent.</strong> When a platform asks, you approve or decline. Nothing is shared until you say yes.</span></li>
-      </ol>
+        <span class="badge"><span class="dot" aria-hidden="true"></span>In development</span>
+        <h1>Get in early.</h1>
+        <p class="lede">Kvick ID lets you verify your identity <strong>once</strong> and reuse that status at any participating platform, with your consent each time. We're building it right now. Leave your email and you'll be among the first in when sign-up opens, plus the odd note on how it's coming along.</p>
 
-      <div class="cta">
-        <a class="btn" href="mailto:contact@kvickid.com?subject=Notify%20me%20when%20Kvick%20ID%20opens">Tell me when it opens</a>
-        <span class="side">We will email you the moment sign-up goes live.</span>
+        <!-- Posts directly to the MailerLite "Kvick ID waitlist" embedded form
+             (account 2492609, form 192243161177785547). We deliberately do NOT
+             load MailerLite's universal.js / webforms.js: those add a tracking
+             script + cookie to the page, which is inconsistent with the site's
+             no-tracker posture. Instead the submit handler below does a no-cors
+             POST to the same endpoint the official embed uses. -->
+        <form id="waitlist-form" method="post"
+              action="https://assets.mailerlite.com/jsonp/2492609/forms/192243161177785547/subscribe"
+              novalidate>
+          <div class="field">
+            <label for="email">Email</label>
+            <input type="email" id="email" name="fields[email]" required autocomplete="email" placeholder="you@example.com" inputmode="email">
+          </div>
+          <div class="field">
+            <label for="fname">First name <span class="opt">(optional)</span></label>
+            <input type="text" id="fname" name="fields[name]" autocomplete="given-name" placeholder="So we can say hello properly">
+          </div>
+
+          <div class="consent">
+            <input type="checkbox" id="consent" name="consent" required>
+            <label for="consent">Email me Kvick ID updates and let me know when sign-up opens. I can unsubscribe any time.</label>
+          </div>
+
+          <input type="hidden" name="ml-submit" value="1">
+          <input type="hidden" name="anticsrf" value="true">
+
+          <button class="btn" type="submit">
+            Keep me posted
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </button>
+          <p class="form-error" id="form-error" hidden>Something went wrong sending that. Please email <a href="mailto:contact@kvickid.com">contact@kvickid.com</a> and we'll add you by hand.</p>
+        </form>
+
+        <div class="done" id="done" role="status" aria-live="polite">
+          <div class="check" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M4 12.5l5 5L20 6.5" stroke="#35e0a0" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <h1>You're on the list.</h1>
+          <p>We'll email you as Kvick ID takes shape, and the moment sign-up opens. No spam, and you can leave whenever you want.</p>
+          <p>Want to talk sooner? Reach us at <a href="mailto:contact@kvickid.com">contact@kvickid.com</a>.</p>
+        </div>
+
+        <div class="idea">
+          <h2>Here's the idea</h2>
+          <ol class="steps">
+            <li><span class="n" aria-hidden="true">1</span><span><strong>Create your account.</strong> Just a username and email to start. Nothing more until you choose to verify.</span></li>
+            <li><span class="n" aria-hidden="true">2</span><span><strong>Verify once.</strong> A specialist provider checks your ID. Kvick ID keeps the result, never the documents.</span></li>
+            <li><span class="n" aria-hidden="true">3</span><span><strong>Reuse with consent.</strong> When a platform asks, you approve or decline. Nothing is shared until you say yes.</span></li>
+          </ol>
+        </div>
+
+        <p class="note">
+          We only store your email (and first name, if you add one), and we use it only to send you Kvick ID updates. The list is managed with MailerLite, a GDPR-compliant email provider. We never share it, and every email has a one-click unsubscribe.<br><br>
+          <strong>Stay safe:</strong> only ever sign up or log in at <strong>kvickid.com</strong>. We never ask for identity documents, passwords, or payment by email. Unsure about a message? Forward it to <a href="mailto:contact@kvickid.com">contact@kvickid.com</a> and we'll confirm or deny it came from us.
+        </p>
+
       </div>
-
-      <p class="note">Only ever sign up or log in at <strong>kvickid.com</strong>. We never ask for identity documents, passwords, or payment by email. Unsure about a message? Forward it to <a href="mailto:contact@kvickid.com">contact@kvickid.com</a> and we will confirm or deny that it came from us.</p>
     </div>
   </div>
 </main>
 
 <footer>
   <div class="wrap foot-line">
-    <span>Kvick ID · in development · all example data on this site is synthetic</span>
+    <span>Kvick ID · in development</span>
     <span>© 2026</span>
   </div>
 </footer>
+
+<script>
+  // Preview behaviour: show the success state without a backend. When the
+  // EU newsletter provider is connected, replace this with a real submit
+  // (either a normal form POST to the provider's action URL, or fetch()).
+  (function () {
+    var form = document.getElementById('waitlist-form');
+    var panel = document.getElementById('panel');
+    var errEl = document.getElementById('form-error');
+    if (!form || !panel) return;
+    form.addEventListener('submit', function (e) {
+      e.preventDefault();
+      if (!form.reportValidity()) return;
+      var btn = form.querySelector('button[type="submit"]');
+      if (btn) btn.disabled = true;
+      if (errEl) errEl.hidden = true;
+
+      var body = new URLSearchParams();
+      body.append('fields[email]', document.getElementById('email').value.trim());
+      var fname = document.getElementById('fname').value.trim();
+      if (fname) body.append('fields[name]', fname);
+      body.append('ml-submit', '1');
+      body.append('anticsrf', 'true');
+
+      // no-cors: the POST reaches MailerLite but the response is opaque, so we
+      // can't read it. That's acceptable — the email is validated client-side
+      // first, and this keeps the page free of MailerLite's tracking script.
+      fetch(form.action, { method: 'POST', mode: 'no-cors', body: body })
+        .then(function () {
+          panel.classList.add('is-sent');
+          panel.scrollIntoView({ block: 'nearest' });
+        })
+        .catch(function () {
+          if (btn) btn.disabled = false;
+          if (errEl) errEl.hidden = false;
+        });
+    });
+  })();
+</script>
 
 </body>
 </html>
