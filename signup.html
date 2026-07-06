@@ -3,6 +3,8 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Content-Security-Policy" content="default-src 'self'; base-uri 'self'; object-src 'none'; img-src 'self' data:; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; font-src 'self'; connect-src 'self' https://assets.mailerlite.com; form-action 'self' https://assets.mailerlite.com; frame-ancestors 'none'; upgrade-insecure-requests">
+<meta name="referrer" content="strict-origin-when-cross-origin">
 <title>Get early access to Kvick ID</title>
 <meta name="description" content="Kvick ID lets you verify once and reuse it everywhere with your consent. We're building it now. Leave your email to follow along and be first in when sign-up opens.">
 <meta name="theme-color" content="#0d1013">
@@ -153,6 +155,7 @@
   .btn:hover { transform: translateY(-1px); filter: brightness(1.05); }
   .btn:active { transform: translateY(0); }
   .btn:disabled { opacity: 0.6; cursor: default; transform: none; filter: none; }
+  .hp { position: absolute; left: -9999px; width: 1px; height: 1px; overflow: hidden; }
   .form-error { margin: 0.2rem 0 0; font-size: 0.92rem; color: #ff8a8a; }
   .form-error a { color: var(--accent); text-decoration-color: color-mix(in oklab, var(--accent) 45%, transparent); }
 
@@ -241,6 +244,13 @@
           <input type="hidden" name="ml-submit" value="1">
           <input type="hidden" name="anticsrf" value="true">
 
+          <!-- Honeypot: hidden from people, but bots fill it. If it has a
+               value we silently drop the submit (see the handler below). -->
+          <div class="hp" aria-hidden="true">
+            <label for="hp-url">Leave this field empty</label>
+            <input type="text" id="hp-url" name="url" tabindex="-1" autocomplete="off">
+          </div>
+
           <button class="btn" type="submit">
             Keep me posted
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
@@ -284,9 +294,8 @@
 </footer>
 
 <script>
-  // Preview behaviour: show the success state without a backend. When the
-  // EU newsletter provider is connected, replace this with a real submit
-  // (either a normal form POST to the provider's action URL, or fetch()).
+  // Submits the waitlist form to MailerLite (no-cors) and shows the inline
+  // "check your email" state. A honeypot silently absorbs bot submissions.
   (function () {
     var form = document.getElementById('waitlist-form');
     var panel = document.getElementById('panel');
@@ -294,6 +303,12 @@
     if (!form || !panel) return;
     form.addEventListener('submit', function (e) {
       e.preventDefault();
+
+      // Bot check: if the hidden honeypot was filled, pretend it worked and
+      // never touch MailerLite. Real people never see or fill this field.
+      var hp = document.getElementById('hp-url');
+      if (hp && hp.value) { panel.classList.add('is-sent'); return; }
+
       if (!form.reportValidity()) return;
       var btn = form.querySelector('button[type="submit"]');
       if (btn) btn.disabled = true;
