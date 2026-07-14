@@ -354,20 +354,20 @@
           <pre class="payload" aria-label="Example of the data a platform receives with the person's consent"><code>{
   <span class="k">"verified"</span>:    <span class="v">true</span>,
   <span class="k">"level"</span>:       <span class="v">"standard"</span>,
-  <span class="k">"provider"</span>:    <span class="v">"…"</span>,
+  <span class="k">"provider"</span>:    <span class="v">"sumsub"</span>,
   <span class="k">"verified_at"</span>: <span class="v">"2026-07-04"</span>,
   <span class="k">"expires_at"</span>:  <span class="v">"2027-07-04"</span>,
   <span class="k">"data_scope"</span>:  <span class="v">"identity_data"</span>,
   <span class="k">"holder"</span>: {
-    <span class="k">"full_name"</span>:            <span class="v">"…"</span>,
-    <span class="k">"date_of_birth"</span>:        <span class="v">"…"</span>,
-    <span class="k">"nationality"</span>:          <span class="v">"…"</span>,
-    <span class="k">"country_of_residence"</span>: <span class="v">"…"</span>
+    <span class="k">"full_name"</span>:            <span class="v">"Maria Andersen"</span>,
+    <span class="k">"date_of_birth"</span>:        <span class="v">"1993-02-11"</span>,
+    <span class="k">"nationality"</span>:          <span class="v">"DK"</span>,
+    <span class="k">"country_of_residence"</span>: <span class="v">"DK"</span>
   },
   <span class="k">"evidence"</span>: { <span class="k">"documents_held_by"</span>: <span class="v">"kyc_provider"</span> },
   <span class="k">"signature"</span>:   <span class="v">"eyJhbGciOi…"</span> <span class="c">// verifiable</span>
 }</code></pre>
-          <p class="after">That is the complete payload: the customer's verified details, signed, timestamped, and tied to the specific consent that authorised it. Your team makes its own decision on data it can actually file. If your own regulator later asks what you saw and when, you can show them, and the evidence marker tells you where the underlying documents live, available on request from the provider that holds them. The consent behind it has no expiry date; it stands until the customer withdraws it, and you can re-check whenever your monitoring needs it. If the customer withdraws, or a verification is retracted, you are notified at once. Only need an extra signal on top of your own KYC? Request the status-only scope instead: same signature, no personal details.</p>
+          <p class="after">That is the complete payload: the customer's verified details, signed, timestamped, and tied to the specific consent that authorised it. Your team makes its own decision on data it can actually file. If your own regulator later asks what you saw and when, you can show them, and the evidence marker tells you where the underlying documents live, available on request from the provider that holds them. The consent behind it has no expiry date; it stands until the customer withdraws it, and you can re-check whenever your monitoring needs it. If the customer withdraws, or a verification is retracted, you are notified at once. Only need an extra signal on top of your own KYC? Request the status-only scope instead: same signature, no personal details. Every value above is sample data.</p>
         </div>
         <div class="never rise">
           <h3>Built in, by design</h3>
