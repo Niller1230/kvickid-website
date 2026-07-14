@@ -325,14 +325,14 @@
           <span class="n" aria-hidden="true">2</span>
           <div>
             <h3>You ask, and the customer consents</h3>
-            <p>Your platform asks Kvick ID a single question: is this person verified, at the level you require? Nothing is shared until the customer approves the request. <strong>You learn nothing, not even whether an account exists, until they say yes.</strong></p>
+            <p>Your platform asks Kvick ID a single question: is this person verified, at the level you require? Nothing is shared until the customer approves the request. <strong>You learn nothing, not even whether an account exists, until they say yes.</strong> One yes is all it takes: the approval stands until the customer withdraws it, so your later re-checks are covered without asking them again.</p>
           </div>
         </li>
         <li class="rise">
           <span class="n" aria-hidden="true">3</span>
           <div>
             <h3>You receive signed evidence</h3>
-            <p>A short, cryptographically signed status: verified, at what level, by which provider, valid until when. You can file it and prove later exactly what you received, and when the customer authorised it.</p>
+            <p>The customer's verified details (name, date of birth, nationality, residence) and their status: verified, at what level, by which provider, valid until when. All of it cryptographically signed, so you can file it and prove later exactly what you received, and when the customer authorised it.</p>
           </div>
         </li>
         <li class="rise">
@@ -368,7 +368,7 @@
   <span class="k">"evidence"</span>: { <span class="k">"documents_held_by"</span>: <span class="v">"kyc_provider"</span> },
   <span class="k">"signature"</span>:   <span class="v">"eyJhbGciOi…"</span> <span class="c">// verifiable</span>
 }</code></pre>
-          <p class="after">That is the complete payload: the customer's verified details, signed, timestamped, and tied to the specific consent that authorised it. Your team makes its own decision on data it can actually file. If your own regulator later asks what you saw and when, you can show them. Only need an extra signal on top of your own KYC? Request the status-only scope instead: same signature, no personal details.</p>
+          <p class="after">That is the complete payload: the customer's verified details, signed, timestamped, and tied to the specific consent that authorised it. Your team makes its own decision on data it can actually file. If your own regulator later asks what you saw and when, you can show them. The consent behind it has no expiry date; it stands until the customer withdraws it, and you can re-check whenever your monitoring needs it. If the customer withdraws, or a verification is retracted, you are notified at once. Only need an extra signal on top of your own KYC? Request the status-only scope instead: same signature, no personal details.</p>
         </div>
         <div class="never rise">
           <h3>Never included</h3>
