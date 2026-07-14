@@ -103,6 +103,13 @@
   }
 
   footer { padding-block: 1.5rem; border-top: 1px solid var(--line); }
+  .foot-brand { display: grid; gap: 0.9rem; max-width: 21rem; align-content: start; }
+  .foot-brand .foot-contact { font-size: 0.98rem; }
+  .foot-links { display: flex; flex-wrap: wrap; gap: clamp(1.8rem, 5vw, 4rem); }
+  .foot-links .col { display: grid; gap: 0.5rem; align-content: start; min-width: 10rem; }
+  .fl-h { font-weight: 700; font-size: 0.95rem; margin-bottom: 0.3rem; }
+  .foot-links a { color: var(--ink-soft); text-decoration: none; font-size: 0.95rem; }
+  .foot-links a:hover { color: var(--ink); text-decoration: underline; text-underline-offset: 3px; }
   .foot-line { display: flex; flex-wrap: wrap; gap: 0.6rem 2rem; justify-content: space-between; font-size: 0.85rem; color: var(--ink-soft); }
 </style>
 </head>
@@ -131,9 +138,40 @@
 </main>
 
 <footer>
-  <div class="wrap foot-line">
-    <span>Kvick ID · in development</span>
-    <span><a href="https://www.linkedin.com/company/kvick-id" rel="noopener">LinkedIn</a> · © 2026</span>
+  <div class="wrap">
+    <div class="foot-top">
+      <div class="foot-brand">
+        <a class="mark" href="/" aria-label="Kvick ID home">
+          <svg width="30" height="30" viewBox="0 0 64 64" aria-hidden="true"><rect width="64" height="64" rx="6" fill="#4A9C4A"/><text x="33" y="51" font-family="Schibsted Grotesk, Helvetica Neue, Arial, sans-serif" font-weight="700" font-size="51" fill="#FFFFFF" text-anchor="middle">K</text></svg>
+          Kvick&nbsp;ID
+        </a>
+        <p class="foot-contact">Questions, pilots, or verifying an email you received:<br><a href="mailto:contact@kvickid.com">contact@kvickid.com</a></p>
+      </div>
+      <nav class="foot-links" aria-label="Footer">
+        <div class="col">
+          <span class="fl-h">Explore</span>
+          <a href="/business.html">For platforms</a>
+          <a href="/partners.html">Our partners</a>
+          <a href="/news.html">News &amp; updates</a>
+          <a href="/faq.html">FAQ</a>
+        </div>
+        <div class="col">
+          <span class="fl-h">Get in touch</span>
+          <a href="/contact.html">Contact us</a>
+          <a href="/contact.html#support">Customer service</a>
+          <a href="https://www.linkedin.com/company/kvick-id" rel="noopener">LinkedIn</a>
+        </div>
+        <div class="col">
+          <span class="fl-h">Legal</span>
+          <a href="/privacy.html">Privacy &amp; your data</a>
+          <a href="/terms.html">Terms of use</a>
+        </div>
+      </nav>
+    </div>
+    <div class="foot-line">
+      <span>Kvick ID · in development · all example data on this site is synthetic</span>
+      <span>© 2026 Kvick ID</span>
+    </div>
   </div>
 </footer>
 
