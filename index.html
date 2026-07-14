@@ -399,7 +399,7 @@
           <span class="n" aria-hidden="true">4</span>
           <div>
             <h3>The platform gets a signed answer</h3>
-            <p>A cryptographically signed status: verified, at what level, by which provider, valid until when. Evidence the platform can file and stand behind, <strong>for its own compliance decision</strong>. Kvick ID supplies the evidence; the decision stays with the platform.</p>
+            <p>A cryptographically signed answer carrying the verified details the person approved — name, date of birth, nationality, residence — plus level, provider and validity. Evidence the platform can file and stand behind, <strong>for its own compliance decision</strong>. Kvick ID supplies the evidence; the decision stays with the platform.</p>
           </div>
         </li>
       </ol>
@@ -412,21 +412,29 @@
       <h2 id="rcv-h">What a platform receives</h2>
       <div class="receive-grid">
         <div>
-          <pre class="payload" aria-label="Example of the complete data a platform receives"><code>{
+          <pre class="payload" aria-label="Example of the data a platform receives with the person's consent"><code>{
   <span class="k">"verified"</span>:    <span class="v">true</span>,
   <span class="k">"level"</span>:       <span class="v">"standard"</span>,
   <span class="k">"provider"</span>:    <span class="v">"…"</span>,
   <span class="k">"verified_at"</span>: <span class="v">"2026-07-04"</span>,
   <span class="k">"expires_at"</span>:  <span class="v">"2027-07-04"</span>,
+  <span class="k">"data_scope"</span>:  <span class="v">"identity_data"</span>,
+  <span class="k">"holder"</span>: {
+    <span class="k">"full_name"</span>:            <span class="v">"…"</span>,
+    <span class="k">"date_of_birth"</span>:        <span class="v">"…"</span>,
+    <span class="k">"nationality"</span>:          <span class="v">"…"</span>,
+    <span class="k">"country_of_residence"</span>: <span class="v">"…"</span>
+  },
+  <span class="k">"evidence"</span>: { <span class="k">"documents_held_by"</span>: <span class="v">"kyc_provider"</span> },
   <span class="k">"signature"</span>:   <span class="v">"eyJhbGciOi…"</span> <span class="c">// verifiable</span>
 }</code></pre>
-          <p class="after">That is the complete payload: signed, timestamped, and tied to the specific consent that authorised it. What was shared, and when, is provable later by either side.</p>
+          <p class="after">That is the complete payload: the verified details the person approved, signed, timestamped, and tied to the specific consent that authorised it. What was shared, and when, is provable later by either side. Platforms that only want an extra signal can request a status-only version with no personal details at all.</p>
         </div>
         <div class="never">
           <h3>Never included</h3>
           <ul>
             <li><span class="x" aria-hidden="true">×</span><span><strong>No identity documents.</strong> Kvick ID holds none, so it can pass none.</span></li>
-            <li><span class="x" aria-hidden="true">×</span><span><strong>No personal details</strong> beyond the verification status itself.</span></li>
+            <li><span class="x" aria-hidden="true">×</span><span><strong>Nothing the person hasn't approved.</strong> The consent screen lists every field before they decide, and a permission never widens on its own.</span></li>
             <li><span class="x" aria-hidden="true">×</span><span><strong>No mention of where the person verified first.</strong> Platforms learn nothing about each other's customers through us.</span></li>
             <li><span class="x" aria-hidden="true">×</span><span><strong>No answer at all without consent.</strong> Asking about any email address looks identical from the outside until the person says yes.</span></li>
           </ul>
