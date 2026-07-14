@@ -368,12 +368,12 @@
   <span class="k">"evidence"</span>: { <span class="k">"documents_held_by"</span>: <span class="v">"kyc_provider"</span> },
   <span class="k">"signature"</span>:   <span class="v">"eyJhbGciOi…"</span> <span class="c">// verifiable</span>
 }</code></pre>
-          <p class="after">That is the complete payload: the customer's verified details, signed, timestamped, and tied to the specific consent that authorised it. Your team makes its own decision on data it can actually file. If your own regulator later asks what you saw and when, you can show them. The consent behind it has no expiry date; it stands until the customer withdraws it, and you can re-check whenever your monitoring needs it. If the customer withdraws, or a verification is retracted, you are notified at once. Only need an extra signal on top of your own KYC? Request the status-only scope instead: same signature, no personal details.</p>
+          <p class="after">That is the complete payload: the customer's verified details, signed, timestamped, and tied to the specific consent that authorised it. Your team makes its own decision on data it can actually file. If your own regulator later asks what you saw and when, you can show them, and the evidence marker tells you where the underlying documents live, available on request from the provider that holds them. The consent behind it has no expiry date; it stands until the customer withdraws it, and you can re-check whenever your monitoring needs it. If the customer withdraws, or a verification is retracted, you are notified at once. Only need an extra signal on top of your own KYC? Request the status-only scope instead: same signature, no personal details.</p>
         </div>
         <div class="never rise">
           <h3>Built in, by design</h3>
           <ul>
-            <li><span class="x" aria-hidden="true">✓</span><span><strong>Zero document liability.</strong> The files stay with the specialist provider that checked them, so working with us adds no document store to your risk surface.</span></li>
+            <li><span class="x" aria-hidden="true">✓</span><span><strong>Zero document custody, full document access.</strong> The files stay with the specialist provider that checked them, exactly as with your own KYC today, and copies remain available on request for the day your regulator asks. You just carry no extra document store.</span></li>
             <li><span class="x" aria-hidden="true">✓</span><span><strong>A recorded consent for every field.</strong> The customer sees exactly what they are sharing before they say yes, and you can show your regulator the consent behind every data point you hold.</span></li>
             <li><span class="x" aria-hidden="true">✓</span><span><strong>Your customer list stays yours.</strong> You learn nothing about other platforms' customers through us, and they learn nothing about yours.</span></li>
             <li><span class="x" aria-hidden="true">✓</span><span><strong>Nobody can use us as a directory.</strong> A request about any email looks identical from the outside until the customer approves it, so accounts cannot be fished for.</span></li>
@@ -398,7 +398,7 @@
         </div>
         <div>
           <dt>No document custody</dt>
-          <dd>Documents stay with the specialist provider that checked them. Kvick ID holds the verified details and the outcome, never the files, so relying on us does not hand you a new pile of sensitive documents to guard.</dd>
+          <dd>Documents stay with the specialist provider that checked them, available on request when your process requires a copy. Kvick ID holds the verified details and the outcome, never the files, so relying on us does not hand you a new pile of sensitive documents to guard.</dd>
         </div>
         <div>
           <dt>Provable, not just asserted</dt>
